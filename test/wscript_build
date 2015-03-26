@@ -3,7 +3,7 @@
 
 
 bld.program(
-    features = 'cxx test',
-    source   = ['fifi_tests.cpp'] + bld.path.ant_glob('src/**/*.cpp'),
-    target   = 'fifi_tests',
-    use      = ['gtest', 'sak_includes', 'fifi', 'fifi_includes', 'boost_includes'])
+    features='cxx test',
+    source=['fifi_tests.cpp'] + bld.path.ant_glob('src/**/*.cpp'),
+    target='fifi_tests',
+    use=['gtest', 'sak_includes', 'fifi', 'fifi_includes', 'boost_includes'])

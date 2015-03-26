@@ -3,9 +3,9 @@
 
 
 bld.program(
-    features = 'cxx benchmark',
-    source   = ['main.cpp'],
-    target   = 'fifi_basic_operations_benchmarks',
-    use      = ['gtest', 'fifi', 'fifi_includes','boost_includes',
-                'sak_includes', 'boost_timer', 'boost_chrono',
-                'boost_system', 'gauge'])
+    features='cxx benchmark',
+    source=['main.cpp'],
+    target='fifi_basic_operations_benchmarks',
+    use=['gtest', 'fifi', 'fifi_includes', 'boost_includes',
+           'sak_includes', 'boost_timer', 'boost_chrono',
+           'boost_system', 'gauge'])

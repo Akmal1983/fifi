@@ -2,38 +2,38 @@
 # encoding: utf-8
 
 optimized_sources = \
-{
-    'ssse3_binary4_full_table': ['-mssse3'],
-    'ssse3_binary8_full_table': ['-mssse3'],
-    'neon_binary4_full_table':  ['-mfpu=neon'],
-    'neon_binary8_full_table':  ['-mfpu=neon'],
-}
+    {
+        'ssse3_binary4_full_table': ['-mssse3'],
+        'ssse3_binary8_full_table': ['-mssse3'],
+        'neon_binary4_full_table':  ['-mfpu=neon'],
+        'neon_binary8_full_table':  ['-mfpu=neon'],
+    }
 
 for source, flags in optimized_sources.items():
-    bld.objects(source   = source + '.cpp',
-                target   = source,
-                cxxflags = [flag for flag in flags
-                            if flag in bld.env['CXXFLAGS_FIFI_SIMD']],
-                use      = ['boost_includes', 'sak_includes', 'cpuid',
-                            'platform_includes'])
+    bld.objects(source=source + '.cpp',
+                target=source,
+                cxxflags=[flag for flag in flags
+                          if flag in bld.env['CXXFLAGS_FIFI_SIMD']],
+                use=['boost_includes', 'sak_includes', 'cpuid',
+                     'platform_includes'])
 
 
 source_files = bld.path.ant_glob(
     '**/*.cpp', excl=[s + '.cpp' for s in optimized_sources.keys()])
 
-bld.stlib(features = 'cxx',
-          source   = source_files,
-          target = 'fifi',
-          use    = ['boost_includes', 'sak_includes', 'sak', 'cpuid',
-                    'platform_includes'] + list(optimized_sources.keys()),
-          export_includes = ['..'])
+bld.stlib(features='cxx',
+          source=source_files,
+          target='fifi',
+          use=['boost_includes', 'sak_includes', 'sak', 'cpuid',
+               'platform_includes'] + list(optimized_sources.keys()),
+          export_includes=['..'])
 
 
 # We want to make sure we can still build the library without any cpu specific
 # optimizations
-bld.stlib(features = 'cxx',
-          source   = bld.path.ant_glob('**/*.cpp'),
-          target = 'fifi_no_dispatch',
-          use    = ['boost_includes', 'sak_includes', 'sak', 'cpuid',
-                    'platform_includes'],
-          export_includes = ['..'])
+bld.stlib(features='cxx',
+          source=bld.path.ant_glob('**/*.cpp'),
+          target='fifi_no_dispatch',
+          use=['boost_includes', 'sak_includes', 'sak', 'cpuid',
+               'platform_includes'],
+          export_includes=['..'])

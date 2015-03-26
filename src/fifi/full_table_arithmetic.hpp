@@ -41,14 +41,12 @@ namespace fifi
         // Check for the binary16 field the full lookup table cannot
         // be used with binary16 due to the excessive amounts of
         // memory it would require to create the look-up table.
-        static_assert(
-            !std::is_same<binary16, field_type>::value,
+        static_assert(!std::is_same<binary16, field_type>::value,
             "This layer does not support the binary16 field");
 
         // Static check for the prime2325 field, the full lookup table
         // only works with binary extension fields
-        static_assert(
-            !std::is_same<prime2325, field_type>::value,
+        static_assert(!std::is_same<prime2325, field_type>::value,
             "This layer does not support the 2^32 - 5 prime field");
 
     public:

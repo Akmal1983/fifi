@@ -28,6 +28,11 @@ namespace fifi
         /// @copydoc layer::value_type
         typedef typename field_type::value_type value_type;
 
+        // Static check for the prime2325 field, the simple online finite field
+        // algorithms only works with binary extension fields
+        static_assert(!std::is_same<prime2325, field_type>::value,
+            "This layer does not support the 2^32 - 5 prime field");
+
     public:
 
         /// @copydoc layer::add(value_type, value_type) const
